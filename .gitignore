@@ -1,0 +1,5 @@
+venv/
+rubert_finetuned/
+*.parquet
+.idea/
+*.md
