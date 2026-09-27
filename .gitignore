@@ -3,3 +3,5 @@ rubert_finetuned/
 *.parquet
 .idea/
 *.md
+.csv
+__*

@@ -3,7 +3,7 @@ import sys
 import logging
 
 
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s', stream=sys.stdout)
 
 
 def checkEnvironment():
