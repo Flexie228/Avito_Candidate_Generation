@@ -8,12 +8,13 @@ def loadLocalModel(model_path='./rubert_finetuned'):
     # загружаем дообученную модель
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     model = SentenceTransformer(model_path, device=device)
+    model.max_seq_length = 512
     return model
 
 
 # "первая башня"
-# этот индекс создаем чтобы не сравнивать эмбеддинг с каждым из 200тыс других
-def buildFaissIndex(model, items_df, batch_size=256):
+# FAISS индекс создаем чтобы не сравнивать эмбеддинг с каждым из 200тыс других
+def buildFaissIndex(model, items_df, batch_size=128):
     texts = items_df['clean_text'].tolist()
 
     # получаем эмбеддинги
@@ -32,7 +33,7 @@ def buildFaissIndex(model, items_df, batch_size=256):
 
 # "вторая башня"
 # тут работаем с векторами запросов, искать для них кандидатов будем среди уже готового на прошлом шаге индекса
-def getFaissCandidates(model, index, items_df, queries_df, top_k=100, batch_size=256):
+def getFaissCandidates(model, index, items_df, queries_df, top_k=100, batch_size=128):
     item_ids = items_df['item_id'].values
     queries_texts = queries_df['clean_text'].tolist()
 
