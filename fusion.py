@@ -12,10 +12,11 @@ def RRF(bm25_list, faiss_list, top_k=50):
         scores[item_faiss] += score
 
     sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+    #возвращаем топ-50 для каждого query_id
     return [item[0] for item in sorted_scores[:top_k]]
 
 
-# получаем топ кандидатов для каждого запроса из задания
+# получаем топ-50 кандидатов для каждого запроса
 def answersScores(bm25_output, faiss_output):
     result = {}
     for query_id in bm25_output.keys():
