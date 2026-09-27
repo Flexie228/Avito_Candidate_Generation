@@ -5,3 +5,6 @@ rubert_finetuned/
 *.md
 .csv
 __*
+*.index
+*.npy
+*.csv
