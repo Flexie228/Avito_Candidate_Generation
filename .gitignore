@@ -1,8 +1,9 @@
 venv/
-data/
 rubert_finetuned/
-val.parquet
+*.parquet
 .idea/
 .csv
 __*
 *.csv
+*.index
+*.npy
