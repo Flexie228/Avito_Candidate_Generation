@@ -20,11 +20,11 @@ def answers_scores(
     top_k=50,
     w_bm25=1.3,
     w_faiss=1.0,
-    loc_match_boost=3.0,
+    loc_match_boost=3.5,
     loc_mismatch_penalty=0.15,
     cat_match_boost=2.0,
-    cat_mismatch_penalty=0.35,
-    delivery_boost=1.7,
+    cat_mismatch_penalty=0.3,
+    delivery_boost=1.9,
     hidden_contact_penalty=0.7
 ):
     # словари параметров объявлений
