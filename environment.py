@@ -4,16 +4,17 @@ import logging
 
 
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s', stream=sys.stdout)
+logging.getLogger('faiss.loader').setLevel(logging.WARNING)
+logging.getLogger('sentence_transformers').setLevel(logging.WARNING)
 
+paths = {
+    'benchmark_items': 'data/benchmark_items.parquet',
+    'benchmark_queries': 'data/benchmark_queries.parquet',
+    'rubert_finetuned': './rubert_finetuned'
+}
 
 def checkEnvironment():
-    required_paths = [
-        'benchmark_items.parquet',
-        'benchmark_queries.parquet',
-        'rubert_finetuned'
-    ]
-
-    for path in required_paths:
+    for path in paths.values():
         if not os.path.exists(path):
             logging.error(f'не найден обязательный путь: {path}')
             sys.exit(1)

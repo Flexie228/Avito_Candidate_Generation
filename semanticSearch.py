@@ -3,11 +3,11 @@ import numpy as np
 import faiss
 import torch
 from sentence_transformers import SentenceTransformer
-from sentence_transformers.util import normalize_embeddings
+from environment import paths
 
 
 def loadLocalModel(model_path='./rubert_finetuned'):
-    # загружаем дообученную модель
+    # загружаем дообученную модель и применяем cuda, если доступно
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     model = SentenceTransformer(model_path, device=device)
     model.max_seq_length = 512
@@ -17,9 +17,11 @@ def loadLocalModel(model_path='./rubert_finetuned'):
 # "первая башня"
 # FAISS индекс создаем чтобы не сравнивать эмбеддинг с каждым из 200тыс других
 def buildFaissIndex(model, items_df, batch_size=128):
-    embeddings_path = 'semantic_embeddings.npy'
-    index_path = 'semantic.index'
+    embeddings_path = 'data/semantic_embeddings.npy'
+    index_path = 'data/semantic.index'
 
+
+    # загружаем заранее готовые индексы и эмбеддинги, если они есть, а если нет - создаем
     if os.path.exists(embeddings_path) and os.path.exists(index_path):
         embeddings = np.load(embeddings_path, mmap_mode='r')
         index = faiss.read_index(index_path)
@@ -41,7 +43,7 @@ def buildFaissIndex(model, items_df, batch_size=128):
     dimension = embeddings.shape[1]
     index = faiss.IndexHNSWFlat(dimension, 32, faiss.METRIC_INNER_PRODUCT)
     index.hnsw.efConstruction = 300
-    index.hnsw.efSearch = 150
+    index.hnsw.efSearch = 1000
     index.add(embeddings)
     faiss.write_index(index, index_path)
     return index

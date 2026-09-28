@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-# формируем ответ
+# формируем ответ и сохраняем его в файл
 def saveAnswer(result, output_path='answer.csv'):
     query_ids = list(result.keys())
     predictions = list(result.values())
