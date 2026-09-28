@@ -1,5 +1,5 @@
 Для запуска:
-
+https://drive.google.com/drive/folders/12dqHELCziAp9OQ6yfcb0T1LLZhJ21Ush?usp=sharing
 Скачайте папку с весами модели по ссылке [https://drive.google.com/drive/folders/16b72uztMvQP_OzN47lMIJ5OjkXz3cF1E?usp=sharing]  и положите ее в корень проекта.
 Файлы (benchmark_items.parquet и benchmark_queries.parquet) поместите в папку data/.
 
