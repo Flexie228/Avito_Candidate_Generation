@@ -3,7 +3,6 @@ data/
 rubert_finetuned/
 val.parquet
 .idea/
-*.md
 .csv
 __*
 *.csv
